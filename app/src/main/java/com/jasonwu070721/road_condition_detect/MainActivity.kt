@@ -62,20 +62,18 @@ class MainActivity : AppCompatActivity() {
                 this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
         }
 
-        // Set up the listeners for take photo and video capture buttons
-//        binding.imageCaptureButton.setOnClickListener { takePhoto() }
-//        binding.videoCaptureButton.setOnClickListener { captureVideo() }
-
         cameraExecutor = Executors.newSingleThreadExecutor()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Set up the listeners for take photo and video capture buttons
+        binding.imageCaptureButton.setOnClickListener { takePhoto() }
+        binding.videoCaptureButton.setOnClickListener { captureVideo() }
+
         // Example of a call to a native method
         binding.sampleText.text = stringFromJNI()
     }
-
-
 
     private fun takePhoto() {
         // Get a stable reference of the modifiable image capture use case
