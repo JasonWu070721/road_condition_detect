@@ -36,7 +36,7 @@ import androidx.core.content.PermissionChecker
 import java.nio.ByteBuffer
 import java.text.SimpleDateFormat
 import java.util.Locale
-
+import android.util.Size
 
 typealias LumaListener = (luma: Double) -> Unit
 
@@ -225,6 +225,10 @@ class MainActivity : AppCompatActivity() {
                 .build()
 
             val imageAnalyzer = ImageAnalysis.Builder()
+                .apply{
+                    setImageQueueDepth(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                    setTargetResolution(Size(224, 224))
+                }
                 .build()
                 .also {
                     it.setAnalyzer(cameraExecutor, LuminosityAnalyzer { luma ->
